@@ -36,3 +36,31 @@ fetch(url)
         currently[2].textContent = wObject.main.humidity
         currently[3].textContent = wObject.wind.speed
     })
+
+const titles = document.querySelectorAll('.title')
+
+const imgs = document.querySelectorAll('.article-img')
+
+const descriptions = document.querySelectorAll('.description')
+
+const links = document.querySelectorAll('.article-link')
+
+console.log(titles[0])
+
+
+const url2 = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=581ba71649fc4b389ec64ae2ddc8cf04`
+fetch(url2)
+    .then((response) => response.json())
+    .then((jsObject) => {
+        console.log(jsObject)
+
+
+        for (let i = 0; i < titles.length; i++) {
+            titles[i].textContent = jsObject.articles[i].title
+            imgs[i].src = jsObject.articles[i].urlToImage
+            descriptions[i].textContent = jsObject.articles[i].description
+            links[i].href = jsObject.articles[i].url
+            links[i].textContent = jsObject.articles[i].source.name
+        }
+
+    })
